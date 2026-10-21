@@ -1,0 +1,10 @@
+---
+const { class: cls = '' } = Astro.props;
+import Icon from './Icon.astro';
+---
+<div class={`relative bg-forest-2 ${cls}`} role="img" aria-label="Service area map placeholder">
+  <span class="absolute left-5 top-5 inline-flex items-center gap-1.5 bg-black/55 px-2.5 py-1 font-display text-[12px] font-bold uppercase tracking-wider text-white"><Icon name="camera" size={12} />Sample imagery</span>
+  <div class="absolute left-1/2 top-1/2 size-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-dashed border-sun/40"></div>
+  <svg class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" width="72" height="72" viewBox="0 0 72 72" aria-hidden="true"><path d="M36 6c13.3 0 24 10.3 24 23.5C60 46 36 66 36 66S12 46 12 29.5C12 16.3 22.7 6 36 6z" fill="#f7c531"/></svg>
+  <span class="absolute bottom-5 left-5 bg-white px-3 py-2 text-[13px] font-semibold text-ink">Service area map · Strathpine HQ + 30 min radius</span>
+</div>

@@ -1,0 +1,5 @@
+---
+import Icon from './Icon.astro';
+const { class: cls = 'left-4 bottom-4' } = Astro.props;
+---
+<span class={`absolute ${cls} inline-flex items-center gap-1.5 bg-black/55 px-2.5 py-1 font-display text-[12px] font-bold uppercase tracking-wider text-white`}><Icon name="camera" size={12} />Sample imagery</span>

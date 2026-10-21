@@ -1,0 +1,62 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageTitle from '../components/PageTitle.astro';
+import Icon from '../components/Icon.astro';
+import { img } from '../components/img';
+const jobs = [
+  ['Albany Creek', 'New install', 'new', 'Bedroom and living split, 2 days from quote to cool.', 'pexels-5866151', 'pexels-7587368'],
+  ['North Lakes', 'Replacement', 'replace', 'Old noisy unit out, quiet inverter in. Same day.', 'pexels-7347538', 'pexels-38788452'],
+  ['Aspley', 'Multi-head system', 'multi', 'Three rooms, one outdoor unit, neat side access.', 'pexels-2587054', 'pexels-6914713'],
+  ['Chermside', 'Servicing & cleaning', 'service', 'Coils and filters deep cleaned, smells gone.', 'pexels-5463575', 'pexels-16592625'],
+  ['Petrie', 'Repair', 'repair', 'No-cool call-out fixed on the first visit.', 'pexels-32588555', 'pexels-6316054'],
+  ['Strathpine', 'New install', 'new', 'Granny flat split, fully commissioned and walked through.', 'pexels-37064587', 'pexels-3302537'],
+];
+const filters = [['all', 'All jobs'], ['new', 'New installs'], ['replace', 'Replacements'], ['multi', 'Multi-head'], ['service', 'Servicing'], ['repair', 'Repairs']];
+---
+<Base title="Gallery | Paperbark Air Co." description="Before and after split system installs across Brisbane's northside." active="Gallery">
+  <PageTitle photo="pexels-2587054" crumb="Gallery" title="Before & after across the northside" lede="Real homes, real suburbs, tidy installs. Here’s what we leave behind." />
+  <section class="bg-cream">
+    <div class="wrap flex flex-col gap-4 py-7 lg:flex-row lg:items-center lg:justify-between">
+      <div class="flex flex-wrap gap-2" id="filters">
+        {filters.map(([k, l], i) => <button type="button" data-f={k} aria-pressed={i === 0 ? 'true' : 'false'} class="border-2 border-forest bg-white px-4 py-1.5 font-display text-[18px] font-extrabold uppercase text-forest aria-pressed:bg-forest aria-pressed:text-sun">{l}</button>)}
+      </div>
+      <p class="self-start bg-navy px-4 py-2.5 font-display text-[16px] font-extrabold uppercase text-sun lg:self-auto">Sample imagery — photos are placeholders</p>
+    </div>
+  </section>
+  <section class="py-14 lg:py-[72px]">
+    <div class="wrap grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {jobs.map(([s, t, k, d, b, a]) => (
+        <article data-k={k} class="job border-b-[6px] border-sun bg-cream">
+          <div class="grid grid-cols-2 gap-1 bg-white">
+            {[[b, 'Before'], [a, 'After']].map(([p, l]) => (
+              <div class="relative">
+                <Image src={img(p)} alt={`${l}: ${t.toLowerCase()} in ${s} (sample image)`} widths={[240, 480]} sizes="(min-width:1024px) 210px, 50vw" class="h-[200px] sm:h-[240px] w-full object-cover" />
+                <span class={`absolute left-2.5 top-2.5 px-2.5 py-1 font-display text-[16px] font-black uppercase ${l === 'After' ? 'bg-sun text-navy' : 'bg-navy text-white'}`}>{l}</span>
+              </div>
+            ))}
+          </div>
+          <div class="p-5">
+            <h2 class="flex items-center gap-2 text-[30px] text-forest"><Icon name="pin" size={22} />{s}</h2>
+            <p class="font-display text-[17px] font-extrabold uppercase tracking-wide text-forest-2">{t}</p>
+            <p class="mt-1.5 text-[15px] text-muted">{d}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+  <section class="bg-navy py-12 lg:py-14">
+    <div class="wrap grid gap-8 md:grid-cols-3">
+      {[['Tidy', 'Drop sheets down. Site vacuumed. Every job.'], ['Neat', 'Straight pipework, covered, clipped and sealed.'], ['Tested', 'Commissioned and walked through before we leave.']].map(([t, d]) => (
+        <div><h2 class="text-[48px] sm:text-[56px] text-sun">{t}</h2><p class="mt-2 text-[17px] text-mint-text">{d}</p></div>
+      ))}
+    </div>
+  </section>
+  <script>
+    const btns = document.querySelectorAll<HTMLButtonElement>('#filters button');
+    btns.forEach((b) => b.addEventListener('click', () => {
+      btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      document.querySelectorAll<HTMLElement>('.job').forEach((j) => { j.hidden = b.dataset.f !== 'all' && j.dataset.k !== b.dataset.f; });
+    }));
+  </script>
+</Base>

@@ -1,0 +1,49 @@
+---
+import Icon from './Icon.astro';
+const services = ['New install', 'Replacement', 'Multi-head', 'Service & clean', 'Repair'];
+const suburbs = ['Strathpine', 'Albany Creek', 'Aspley', 'Chermside', 'North Lakes', 'Petrie', 'Brendale', 'Bray Park', 'Lawnton', 'Everton Park', 'Kallangur', 'Murrumba Downs', 'Mango Hill', 'Redcliffe', 'Other'];
+---
+<form id="quote" class="quote-form scroll-mt-28 border-2 border-forest bg-cream p-6 sm:p-10" action="#" method="post" novalidate>
+  <h2 class="text-[34px] sm:text-[40px] text-forest">Request your free quote</h2>
+  <div class="mt-5 grid gap-5 sm:grid-cols-2">
+    <label><span class="field-label">Name *</span><input class="field" name="name" placeholder="Your full name" autocomplete="name" /></label>
+    <label><span class="field-label">Mobile *</span><input class="field" name="mobile" type="tel" placeholder="04xx xxx xxx" autocomplete="tel" /></label>
+    <label><span class="field-label">Email *</span><input class="field" name="email" type="email" placeholder="you@example.com" autocomplete="email" /></label>
+    <label class="relative"><span class="field-label">Suburb *</span>
+      <select class="field appearance-none text-ph" name="suburb"><option value="">Select your suburb</option>{suburbs.map((s) => <option>{s}</option>)}</select>
+      <Icon name="chev" size={18} class="pointer-events-none absolute bottom-[15px] right-4 text-forest" /></label>
+  </div>
+  <fieldset class="mt-5">
+    <legend class="field-label">Service type *</legend>
+    <div class="flex flex-wrap gap-2">
+      {services.map((s, i) => (
+        <label class="cursor-pointer">
+          <input type="radio" name="service" value={s} class="peer sr-only" checked={i === 0} />
+          <span class="inline-block border-2 border-forest bg-white px-3.5 py-2 font-display text-[17px] font-extrabold uppercase text-forest peer-checked:bg-forest peer-checked:text-sun peer-focus-visible:outline-2 peer-focus-visible:outline-sun">{s}</span>
+        </label>
+      ))}
+    </div>
+  </fieldset>
+  <div class="mt-5 grid gap-5 sm:grid-cols-2">
+    <label><span class="field-label">Rooms to cool</span><input class="field" name="rooms" placeholder="e.g. 2 bedrooms + living" /></label>
+    <label class="relative"><span class="field-label">Best time to call</span>
+      <select class="field appearance-none text-ph" name="time"><option value="">Select a time</option><option>Morning (7–10am)</option><option>Midday (10am–2pm)</option><option>Afternoon (2–5pm)</option></select>
+      <Icon name="chev" size={18} class="pointer-events-none absolute bottom-[15px] right-4 text-forest" /></label>
+  </div>
+  <label class="mt-5 block"><span class="field-label">Notes</span><textarea class="field !h-[88px] py-3" name="notes" placeholder="Existing unit, access, pets…"></textarea></label>
+  <div class="mt-5"><span class="field-label">Photos (optional)</span>
+    <label class="flex h-14 cursor-pointer items-center justify-center gap-3 border-2 border-dashed border-[#c9c0a8] bg-white text-[14px] font-medium text-muted"><Icon name="upload" />Upload photos of your existing unit or switchboard<input type="file" name="photos" accept="image/*" multiple class="sr-only" /></label>
+  </div>
+  <label class="mt-5 flex items-start gap-3 text-[14px] text-muted"><input type="checkbox" checked class="mt-0.5 size-6 shrink-0 accent-forest" /> I agree to Paperbark Air Co. contacting me about my quote. See our Privacy Policy.</label>
+  <div class="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
+    <button type="submit" class="btn btn-sun"><Icon name="arrow" />Get My Free Quote</button>
+    <p class="flex items-center gap-2 font-display text-[18px] font-extrabold uppercase text-forest"><Icon name="clock" size={18} />We'll reply within 2 business hours</p>
+  </div>
+  <p class="form-note mt-4 hidden border-2 border-forest bg-white p-3 text-[15px] font-semibold text-forest" role="status">Thanks! This is a demo site, so nothing was sent. In a live build this would land in the business's inbox.</p>
+</form>
+<script>
+  document.querySelectorAll<HTMLFormElement>('form.quote-form').forEach((f) => {
+    f.addEventListener('submit', (e) => { e.preventDefault(); f.querySelector('.form-note')?.classList.remove('hidden'); });
+    f.querySelectorAll('select').forEach((s) => s.addEventListener('change', () => s.classList.toggle('text-ph', !s.value)));
+  });
+</script>

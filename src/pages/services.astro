@@ -1,0 +1,83 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageTitle from '../components/PageTitle.astro';
+import Icon from '../components/Icon.astro';
+import SampleTag from '../components/SampleTag.astro';
+import { img } from '../components/img';
+const svc = [
+  { id: 'new-installs', n: '01', t: 'New installs', jump: 'New installs', d: 'Right-sized split systems for bedrooms, living areas and granny flats.', f: ['Free in-home or video measure-up', 'Sizing to the room, sun and insulation, not guesswork', 'Neat pipework, drop sheets down, site vacuumed', 'Commissioned and walked through before we leave'], ideal: 'Bedrooms, living rooms, home offices, granny flats', p: 'pexels-7587368' },
+  { id: 'replacements', n: '02', t: 'Replacements', jump: 'Replacements', d: 'Swap a tired, noisy or inefficient unit for a modern inverter system, often same day.', f: ['Old unit removed and disposed of responsibly', 'Reuse existing pipework where it is safe to', 'Lower running costs with inverter technology', 'Same-day swaps where stock allows'], ideal: 'Units over 8 years old, rattling, leaking or losing performance', p: 'pexels-38788452' },
+  { id: 'multi-head', n: '03', t: 'Multi-head systems', jump: 'Multi-head', d: 'One outdoor unit, up to five rooms. Neater outside, cooler inside.', f: ['One outdoor unit instead of a wall of them', 'Control every room separately', 'Quote includes pipework routes and switchboard check', 'Ideal for townhouses and tight side access'], ideal: 'Townhouses, whole-home cooling, tight side access', p: 'pexels-6914713' },
+  { id: 'servicing', n: '04', t: 'Servicing & cleaning', jump: 'Servicing & cleaning', d: 'Deep coil and filter cleans that cut running costs, smells and breakdowns.', f: ['Indoor and outdoor coil deep clean', 'Filter, drain and gas pressure check', 'Mould and smell treatment', 'Annual plans so you never forget'], ideal: 'Every unit, every year, before summer hits', p: 'pexels-5463587' },
+  { id: 'repairs', n: '05', t: 'Repairs', jump: 'Repairs', d: 'Not cooling, leaking or showing an error code? We diagnose it properly and fix it.', f: ['Fault finding with a clear written diagnosis', 'Most parts carried on the ute', 'Priority slots for no-cool breakdowns', 'After-hours breakdown line: press 1'], ideal: 'No-cool, water leaks, error codes, noisy units', p: 'pexels-32588555' },
+];
+const brands = ['Daikin', 'Mitsubishi Electric', 'Fujitsu', 'Panasonic', 'LG', 'Samsung', 'Hisense', 'Midea'];
+const faq = [
+  ['How much does a split system install cost?', 'Every home is different, so we give a fixed written quote after measuring up. The price on the quote is the price you pay.'],
+  ['How long does an install take?', 'Most single split installs take half a day. Multi-head systems usually take one to two days, and we’ll confirm the timing on your quote.'],
+  ['What size system do I need?', 'It depends on the room size, sun exposure and insulation. We measure up and recommend the right kW, not the biggest unit on the shelf.'],
+  ['Do you remove the old unit?', 'Yes. Replacements include removal and responsible disposal of your old unit, including recovering the refrigerant.'],
+  ['What warranty do I get?', 'Every install comes with our 5-year workmanship warranty on top of the manufacturer’s warranty, handled by us.'],
+];
+---
+<Base title="Services | Paperbark Air Co." description="Split system installs, replacements, multi-head systems, servicing and repairs across Brisbane's northside." active="Services">
+  <PageTitle photo="pexels-37064587" crumb="Services" title="Split system services, done right" lede="Installs, replacements, multi-head, servicing and repairs. One local crew, one fixed price, one 5-year workmanship warranty." />
+  <nav class="sticky top-[72px] md:top-[82px] z-30 bg-navy" aria-label="Services">
+    <div class="wrap flex gap-1 overflow-x-auto">
+      {svc.map((s, i) => <a href={`#${s.id}`} class={`shrink-0 px-4 py-[18px] font-display text-[17px] sm:text-[19px] font-extrabold uppercase first:pl-0 ${i ? 'text-white hover:text-sun' : 'text-sun'}`}>{s.jump}</a>)}
+    </div>
+  </nav>
+  {svc.map((s, i) => (
+    <section id={s.id} class={`scroll-mt-40 py-14 lg:py-[88px] ${i % 2 ? 'bg-cream' : 'bg-white'}`}>
+      <div class="wrap grid items-center gap-10 lg:grid-cols-2 lg:gap-[72px]">
+        <div class={`relative ${i % 2 ? 'lg:order-2' : ''}`}>
+          <Image src={img(s.p)} alt="" widths={[640, 1280]} sizes="(min-width:1024px) 640px, 100vw" class="aspect-[4/3] w-full object-cover" />
+          <SampleTag />
+        </div>
+        <div>
+          <h2 class="flex items-baseline gap-4 text-forest"><span class="text-[72px] lg:text-[96px] leading-[.8] text-sun">{s.n}</span><span class="text-[40px] lg:text-[56px]">{s.t}</span></h2>
+          <p class="mt-5 text-[17px] sm:text-[19px] leading-relaxed text-muted">{s.d}</p>
+          <ul class="mt-5 space-y-2.5">{s.f.map((f) => <li class="flex items-start gap-3 text-[17px] font-semibold"><span class="mt-0.5 grid size-6 shrink-0 place-items-center bg-sun text-navy"><Icon name="check" size={14} /></span>{f}</li>)}</ul>
+          <p class={`mt-6 px-4 py-3 font-display text-[17px] font-bold uppercase text-forest ${i % 2 ? 'bg-white' : 'bg-mint'}`}>Ideal for: <span class="font-semibold normal-case">{s.ideal}</span></p>
+          <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+            <a href="/contact#quote" class="btn btn-sun"><Icon name="arrow" />Get a Free Quote</a>
+            <a href="tel:1300000000" class="btn btn-ghost-navy"><Icon name="phone" />Call 1300 000 000</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+  <section class="bg-forest py-16 lg:py-[88px]">
+    <div class="wrap">
+      <div class="grid gap-6 lg:grid-cols-[800px_1fr] lg:items-end lg:gap-16">
+        <div><p class="eyebrow text-sun">Brands we install</p><h2 class="mt-3 text-[44px] sm:text-[64px] text-white">We fit the brands that last</h2></div>
+        <p class="text-[17px] sm:text-[18px] leading-relaxed text-mint-text">We’re not tied to one brand. We recommend what suits your home and budget, and every system comes with the manufacturer’s warranty plus ours.</p>
+      </div>
+      <ul class="mt-10 grid grid-cols-2 border-l border-t border-white/25 lg:grid-cols-4">
+        {brands.map((b) => <li class="grid h-[94px] place-items-center border-b border-r border-white/25 px-2 text-center font-display text-[22px] sm:text-[34px] font-black uppercase text-white">{b}</li>)}
+      </ul>
+    </div>
+  </section>
+  <section id="faq" class="bg-cream py-16 lg:py-24">
+    <div class="wrap grid gap-10 lg:grid-cols-[440px_1fr] lg:gap-20">
+      <div>
+        <p class="eyebrow text-forest-2">Quick answers</p>
+        <h2 class="mt-4 text-[44px] sm:text-[64px] text-forest">Questions we get asked daily</h2>
+        <p class="mt-5 text-[18px] leading-relaxed text-muted">Still not sure? Call and a real person will talk it through, no pressure.</p>
+        <a href="tel:1300000000" class="btn btn-forest mt-7"><Icon name="phone" />Call 1300 000 000</a>
+      </div>
+      <div class="border-2 border-forest bg-cream">
+        {faq.map(([q, a], i) => (
+          <details class="faq group border-forest/30 open:bg-white [&:not(:first-child)]:border-t" open={i === 0}>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-display text-[22px] sm:text-[26px] font-extrabold text-forest [&::-webkit-details-marker]:hidden">
+              {q}
+              <span class="grid size-[30px] shrink-0 place-items-center bg-forest text-sun group-open:bg-sun group-open:text-forest"><span class="group-open:hidden"><Icon name="plus" size={16} /></span><span class="hidden group-open:block"><Icon name="minus" size={16} /></span></span>
+            </summary>
+            <p class="px-6 pb-6 text-[16px] leading-relaxed text-muted">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

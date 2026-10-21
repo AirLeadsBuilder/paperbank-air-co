@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import PageTitle from '../components/PageTitle.astro';
+import Icon from '../components/Icon.astro';
+import Chips from '../components/Chips.astro';
+import MapBox from '../components/MapBox.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+const quick = [
+  ['phone', 'Call us', '1300 000 000', '7 days. Press 1 after hours for breakdowns.', 'tel:1300000000'],
+  ['mail', 'Email', 'hello@paperbarkair.example', 'We reply within 2 business hours.', 'mailto:hello@paperbarkair.example'],
+  ['pin', 'Visit', 'Strathpine QLD 4500', 'Northside, Brisbane. Service area below.', '#area'],
+  ['clock', 'Hours', 'Mon–Fri 7am – 5pm', 'Sat 8am – 12pm. After-hours breakdown line.', ''],
+] as const;
+const next = [['01', 'We call you back', 'Usually within 2 business hours.'], ['02', 'Free measure-up', 'In-home or by video, whatever suits you.'], ['03', 'Fixed written quote', 'In your inbox within 48 hours.']];
+---
+<Base title="Contact | Paperbark Air Co." description="Call, text or get a quote. A real person answers. Quotes in 48 hours." active="Contact">
+  <PageTitle photo="pexels-6914713" crumb="Contact" title="Call, text or get a quote" lede="A real person answers. Quotes in 48 hours. Replies within 2 business hours." h="lg:h-[380px]" />
+  <section class="bg-navy">
+    <ul class="mx-auto grid max-w-[1440px] sm:grid-cols-2 lg:grid-cols-4">
+      {quick.map(([i, l, v, s, h]) => (
+        <li class="border-b border-r border-white/10 px-5 py-7 lg:px-9 lg:py-9">
+          <p class="flex items-center gap-2 font-display text-[18px] font-extrabold uppercase tracking-wider text-sun"><Icon name={i} size={20} />{l}</p>
+          {h ? <a href={h} class={`mt-2 block break-words font-display font-black text-white hover:text-sun ${i === 'mail' ? 'text-[22px] lg:text-[20px] xl:text-[24px]' : 'text-[30px] xl:text-[34px]'}`}>{v}</a> : <p class="mt-2 font-display text-[30px] xl:text-[34px] font-black text-white">{v}</p>}
+          <p class="mt-1 text-[14px] text-slate">{s}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <section class="py-16 lg:py-24">
+    <div class="wrap grid gap-10 lg:grid-cols-[480px_1fr] lg:gap-14">
+      <div>
+        <p class="eyebrow text-forest-2">Send us a message</p>
+        <h2 class="mt-4 text-[48px] sm:text-[64px] text-forest">Tell us what’s going on</h2>
+        <p class="mt-6 text-[17px] sm:text-[19px] leading-relaxed text-muted">Fill in the form and a real person from our Strathpine team will get back to you within 2 business hours.</p>
+        <ol class="mt-8 border-2 border-forest">
+          {next.map(([n, t, d], i) => (
+            <li class={`flex items-center gap-4 px-5 py-4 ${i === 1 ? 'bg-cream' : 'bg-white'}`}><span class="font-display text-[48px] font-black leading-none text-sun">{n}</span><span><span class="block font-display text-[24px] font-black uppercase text-forest">{t}</span><span class="text-[15px] text-muted">{d}</span></span></li>
+          ))}
+        </ol>
+        <div class="mt-6 bg-sun p-5 text-navy"><p class="font-display text-[28px] font-black uppercase">Unit stopped in a heatwave?</p><p class="text-[16px]">Call 1300 000 000 and press 1 for after-hours breakdowns.</p></div>
+      </div>
+      <QuoteForm />
+    </div>
+  </section>
+  <section id="area" class="bg-forest lg:grid lg:grid-cols-[760px_1fr] xl:grid-cols-[52.8%_1fr]">
+    <MapBox class="h-[360px] lg:h-[560px]" />
+    <div class="px-5 py-14 sm:px-10 lg:px-16 lg:py-20">
+      <p class="eyebrow text-sun">Service area</p>
+      <h2 class="mt-4 text-[44px] sm:text-[56px] text-white">Brisbane northside &amp; Moreton Bay</h2>
+      <p class="mt-5 text-[17px] sm:text-[18px] leading-relaxed text-mint-text">Based in Strathpine, rarely more than 30 minutes away. Not sure we cover you? Call and ask.</p>
+      <div class="mt-6"><Chips size={17} /></div>
+    </div>
+  </section>
+</Base>

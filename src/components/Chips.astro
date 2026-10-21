@@ -1,0 +1,7 @@
+---
+const { size = 19 } = Astro.props;
+const subs = ['Strathpine', 'Albany Creek', 'Aspley', 'Chermside', 'North Lakes', 'Petrie', 'Brendale', 'Bray Park', 'Lawnton', 'Everton Park', 'Kallangur', 'Murrumba Downs', 'Mango Hill', 'Redcliffe', 'Bald Hills', 'Carseldine', 'Warner', 'Eatons Hill'];
+---
+<ul class="flex flex-wrap gap-2">
+  {subs.map((s, i) => <li class={`border-2 px-3 py-1 font-display font-extrabold uppercase ${i === 0 ? 'border-sun bg-sun text-navy' : 'border-white/70 text-white'}`} style={`font-size:${size}px`}>{s}</li>)}
+</ul>

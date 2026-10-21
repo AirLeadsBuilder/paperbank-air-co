@@ -1,0 +1,17 @@
+---
+import { Image } from 'astro:assets';
+import SampleTag from './SampleTag.astro';
+import { img } from './img';
+interface Props { photo: string; crumb: string; title: string; lede: string; h?: string }
+const { photo, crumb, title, lede, h = 'lg:h-[420px]' } = Astro.props;
+---
+<section class={`relative isolate overflow-hidden bg-forest ${h}`}>
+  <Image src={img(photo)} alt="" widths={[800, 1440, 1920]} sizes="100vw" class="absolute inset-0 -z-20 size-full object-cover" loading="eager" />
+  <div class="absolute inset-0 -z-10" style="background:linear-gradient(90deg,rgba(11,36,26,.94) 0%,rgba(11,36,26,.72) 60%,rgba(11,36,26,.4) 100%)"></div>
+  <div class="wrap flex h-full flex-col justify-center py-16 lg:py-0">
+    <p class="font-display text-[16px] font-bold uppercase tracking-wider"><a href="/" class="text-slate hover:text-white">Home</a> <span class="text-sun">›</span> <span class="font-extrabold text-sun">{crumb}</span></p>
+    <h1 class="mt-4 max-w-[900px] text-[48px] sm:text-[68px] lg:text-[84px] xl:text-[92px] text-white">{title}</h1>
+    <p class="mt-5 max-w-[760px] text-[17px] sm:text-[20px] leading-relaxed text-mint-text">{lede}</p>
+  </div>
+  <SampleTag class="right-4 bottom-4" />
+</section>

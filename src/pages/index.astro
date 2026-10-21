@@ -1,0 +1,251 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Tag from '../components/Tag.astro';
+import SampleTag from '../components/SampleTag.astro';
+import Chips from '../components/Chips.astro';
+import MapBox from '../components/MapBox.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import { img } from '../components/img';
+import barky from '../assets/barky.svg?raw';
+
+const trust = [['QBCC Licensed', 'Lic. 0000000'], ['ARC Refrigerant Licence', 'AU00000'], ['$20M Public Liability', 'Fully insured'], ['5-Year Warranty', 'On all installs'], ['4.9★ Reviews', '120+ local reviews']];
+const symptoms = [
+  ['Not cooling', 'Warm air, weak airflow or a unit that just won’t keep up.', 'Book a repair', '/contact#quote'],
+  ['Noisy or leaking', 'Rattling, dripping water, smells or error codes.', 'Book a diagnostic', '/contact#quote'],
+  ['Power bills up', 'An old unit working overtime? A new inverter pays itself back.', 'Get a replacement quote', '/contact#quote'],
+  ['Want a new system', 'Bedroom, living room or whole home. We size it properly.', 'Get a free quote', '/contact#quote'],
+];
+const services = [
+  ['New installs', 'Right-sized split systems for bedrooms, living areas and granny flats.', 'pexels-7587368', 'new-installs'],
+  ['Replacements', 'Swap a tired, noisy unit for an efficient inverter model, often same day.', 'pexels-38788452', 'replacements'],
+  ['Multi-head systems', 'One outdoor unit, up to five rooms. Neater outside, cooler inside.', 'pexels-6914713', 'multi-head'],
+  ['Servicing & cleaning', 'Deep coil and filter cleans that cut running costs and smells.', 'pexels-5463587', 'servicing'],
+  ['Repairs', 'Not cooling, leaking or showing an error code? We diagnose and fix it.', 'pexels-32588555', 'repairs'],
+];
+const reasons = [
+  ['Local & quick', 'Based in Strathpine. Most quotes booked within 48 hours, breakdowns often same day.'],
+  ['Fixed written quotes', 'The price on the quote is the price you pay. No surprise “extras” on the day.'],
+  ['Sized properly', 'We measure rooms, check sun and insulation, then recommend the right kW, not the biggest.'],
+  ['Tidy installs', 'Drop sheets down, neat pipework outside, everything vacuumed before we leave.'],
+  ['Warranty you can use', '5-year workmanship warranty, handled by us. Not a call centre.'],
+];
+const steps = [
+  ['01', 'Tell us', 'Fill in the form or call. Tell us the rooms, the problem and a good time to chat.'],
+  ['02', 'Free quote', 'We visit or video-call, measure up and send a fixed written quote.'],
+  ['03', 'Install day', 'Licensed techs arrive on time, install neatly and clean up after themselves.'],
+  ['04', 'Enjoy the cool', 'We show you the remote and app, then register your warranty.'],
+];
+const rows: [string, string | null][] = [
+  ['Fixed written quote before we start', null],
+  ['Locally trained, licensed technicians', 'Often subcontracted'],
+  ['Right-sized system, not the biggest', 'Upsell on the day'],
+  ['Site cleaned and vacuumed every job', 'Hit and miss'],
+  ['5-year workmanship warranty', '12 months, if that'],
+  ['Real person answers the phone', 'Voicemail'],
+];
+const reviews = [
+  ['“Quoted on Tuesday, installed Thursday. The guys put drop sheets down, explained the remote and the price didn\'t budge a cent.”', 'Sarah M. · Albany Creek', '2 × bedroom split systems'],
+  ['“Our old unit died in a heatwave. Called after hours, pressed 1 and had a tech out the next morning. Legends.”', 'Dave & Kim R. · North Lakes', 'Breakdown repair'],
+  ['“They talked us out of a bigger system we didn\'t need. Five-head multi split runs quiet and the power bill went down.”', 'Priya T. · Aspley', 'Multi-head system'],
+];
+---
+<Base title="Paperbark Air Co. | Split System Air Conditioning, Brisbane Northside" description="Split system installs, replacements, servicing and repairs for Brisbane's northside and Moreton Bay. Fixed written quotes, 5-year workmanship warranty." active="Home">
+  <!-- Hero -->
+  <section class="relative isolate overflow-hidden bg-forest">
+    <Image src={img('pexels-2587054')} alt="" widths={[800, 1440, 1920]} sizes="100vw" class="absolute inset-0 -z-20 size-full object-cover" loading="eager" fetchpriority="high" />
+    <div class="absolute inset-0 -z-10" style="background:linear-gradient(90deg,rgba(11,36,26,.94) 0%,rgba(11,36,26,.72) 60%,rgba(11,36,26,.4) 100%)"></div>
+    <div class="wrap relative grid gap-8 pt-12 pb-0 lg:min-h-[760px] lg:grid-cols-[760px_1fr] lg:pt-[68px]">
+      <div class="pb-12 lg:pb-16">
+        <h1 class="text-[52px] sm:text-[72px] xl:text-[92px] text-white">Split system air conditioning for Brisbane's northside</h1>
+        <ul class="mt-7 space-y-3">
+          {['Locally trained, licensed tradies', 'Fixed written quotes, no surprises', 'Tidy installs, site cleaned every job', '5-year workmanship warranty'].map((t) => (
+            <li class="flex items-center gap-3.5 text-[18px] sm:text-[21px] font-semibold text-white"><span class="grid size-7 shrink-0 place-items-center bg-sun text-navy"><Icon name="check" size={16} /></span>{t}</li>
+          ))}
+        </ul>
+        <div class="mt-7 flex flex-col gap-3.5 sm:flex-row">
+          <a href="tel:1300000000" class="btn btn-sun"><Icon name="phone" />Call 1300 000 000</a>
+          <a href="/contact#quote" class="btn btn-ghost-light">Get a Free Quote</a>
+        </div>
+      </div>
+      <div class="relative hidden min-h-[520px] lg:block">
+        <div class="absolute right-0 top-0 flex items-center gap-3.5 bg-white px-5 py-3.5">
+          <span class="font-display text-[44px] font-black leading-none text-navy">4.9</span>
+          <span><span class="flex text-sun">{[1, 2, 3, 4, 5].map(() => <Icon name="star" size={18} />)}</span><span class="mt-0.5 flex items-center gap-1.5 text-[13px] font-bold">Customer rating <Tag /></span></span>
+        </div>
+        <div class="absolute bottom-0 right-[60px] w-[400px]" set:html={barky} aria-label="Barky the koala mascot" role="img" />
+        <div class="absolute right-[16px] top-[259px] bg-sun px-5 py-3.5 font-display text-[26px] font-black uppercase leading-[1.05] text-navy">No worries, mate.<br />We'll sort it.</div>
+        <SampleTag class="right-[-30px] bottom-5" />
+      </div>
+    </div>
+  </section>
+  <!-- Trust strip -->
+  <section class="bg-navy">
+    <ul class="mx-auto grid max-w-[1440px] grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+      {trust.map(([t, s]) => (
+        <li class="border-b border-r border-white/10 px-5 py-5 lg:px-7 lg:py-[22px]">
+          <p class="font-display text-[19px] sm:text-[22px] font-black uppercase text-white">{t}</p>
+          <p class="mt-1 flex items-center gap-2 text-[14px] font-medium text-slate">{s} <Tag dark /></p>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <!-- Symptom picker -->
+  <section class="bg-cream py-16 lg:py-[88px]">
+    <div class="wrap">
+      <h2 class="text-[40px] sm:text-[52px] lg:text-[60px] text-forest">Not sure where to start? Tell us what’s going on.</h2>
+      <div class="mt-9 grid sm:grid-cols-2 lg:grid-cols-4 border-2 border-forest">
+        {symptoms.map(([t, d, l, h], i) => (
+          <a href={h} class={`group flex flex-col p-7 border-forest/20 ${i ? 'bg-white border-t sm:border-t-0 sm:border-l' : 'bg-forest'}`}>
+            <h3 class={`text-[30px] ${i ? 'text-forest' : 'text-sun'}`}>{t}</h3>
+            <p class={`mt-3 text-[16px] leading-normal ${i ? 'text-muted' : 'text-mint-text'}`}>{d}</p>
+            <span class={`mt-auto flex items-center gap-2 pt-4 font-display text-[19px] font-extrabold uppercase ${i ? 'text-navy' : 'text-white'}`}>{l}<Icon name="arrow" size={18} class="transition group-hover:translate-x-1" /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <!-- Problem -->
+  <section class="bg-forest lg:grid lg:grid-cols-[640px_1fr] xl:grid-cols-[44.4%_1fr]">
+    <div class="relative h-[320px] sm:h-[440px] lg:h-auto">
+      <Image src={img('pexels-5866151')} alt="Bedroom with a split system air conditioner" widths={[640, 1280]} sizes="(min-width:1024px) 640px, 100vw" class="absolute inset-0 size-full object-cover" />
+      <SampleTag class="left-5 bottom-5" />
+    </div>
+    <div class="px-5 py-14 sm:px-10 lg:px-20 lg:py-20">
+      <p class="eyebrow text-sun">The problem</p>
+      <h2 class="mt-5 max-w-[640px] text-[44px] sm:text-[68px] text-white">Brisbane summers are hot. Your home doesn't have to be.</h2>
+      <p class="mt-6 max-w-[640px] text-[17px] sm:text-[19px] leading-relaxed text-mint-text">Sticky nights. A bedroom that won't cool down. An old unit that rattles more than it chills. Most northside homes put up with it for one summer too many.</p>
+      <ul class="mt-6 space-y-2.5">
+        {['Bedrooms too hot to sleep in, November to March', 'Old or undersized units losing the battle', 'Quotes that change the day the installer turns up'].map((t) => (
+          <li class="flex items-center gap-3 text-[17px] font-semibold text-white"><span class="grid size-[26px] shrink-0 place-items-center bg-alert text-white"><Icon name="x" size={14} /></span>{t}</li>
+        ))}
+      </ul>
+      <p class="mt-7 max-w-[640px] bg-sun px-5 py-4 font-display text-[22px] sm:text-[24px] font-extrabold uppercase leading-tight text-navy">We fix that: the right-sized system, installed properly, at a price we put in writing.</p>
+    </div>
+  </section>
+  <!-- What we do -->
+  <section class="py-16 lg:py-24">
+    <div class="wrap">
+      <div class="flex flex-wrap items-end justify-between gap-5">
+        <h2 class="h2">What we do</h2>
+        <a href="/services" class="btn btn-forest">See All Services</a>
+      </div>
+      <div class="mt-11 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {services.map(([t, d, p, id]) => (
+          <a href={`/services#${id}`} class="group flex flex-col bg-cream border-b-[6px] border-sun">
+            <Image src={img(p)} alt="" widths={[400, 800]} sizes="(min-width:1024px) 251px, (min-width:640px) 50vw, 100vw" class="h-[190px] w-full object-cover" />
+            <div class="flex flex-1 flex-col p-5">
+              <h3 class="text-[26px] text-forest">{t}</h3>
+              <p class="mt-2.5 text-[15px] leading-normal text-muted">{d}</p>
+              <span class="mt-auto flex items-center gap-1.5 pt-4 font-display text-[17px] font-extrabold uppercase text-navy">Learn more <Icon name="arrow" size={16} class="transition group-hover:translate-x-1" /></span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <!-- Why choose us -->
+  <section class="bg-navy py-16 lg:py-24">
+    <div class="wrap">
+      <div class="grid gap-6 lg:grid-cols-[860px_1fr] lg:items-end lg:gap-20">
+        <div><p class="eyebrow text-sun">Why Paperbark Air</p><h2 class="mt-3 text-[44px] sm:text-[64px] text-white">Straight-talking tradies who turn up and do it right</h2></div>
+        <p class="text-[17px] sm:text-[19px] leading-relaxed text-slate">A small local crew from Strathpine. You deal with the same people from quote to install day.</p>
+      </div>
+      <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
+        {reasons.map(([t, d]) => (
+          <div class="border-t-[6px] border-sun pt-5"><h3 class="text-[30px] text-white">{t}</h3><p class="mt-3 text-[16px] leading-normal text-slate">{d}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <!-- How it works -->
+  <section class="bg-cream py-16 lg:py-24">
+    <div class="wrap">
+      <p class="eyebrow text-forest-2">How it works</p>
+      <h2 class="h2 mt-3">Cool in four easy steps</h2>
+      <ol class="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0">
+        {steps.map(([n, t, d], i) => (
+          <li class={i ? 'lg:border-l-2 lg:border-forest/15 lg:pl-8' : 'lg:pr-8'}>
+            <span class="block font-display text-[96px] lg:text-[120px] font-black leading-[.85] text-sun">{n}</span>
+            <h3 class="mt-3 text-[34px] text-forest">{t}</h3>
+            <p class="mt-3 text-[16px] leading-normal text-muted">{d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+  <!-- Us vs others -->
+  <section class="py-16 lg:py-24">
+    <div class="wrap">
+      <p class="eyebrow text-forest-2">The difference</p>
+      <h2 class="h2 mt-3">Paperbark Air vs. the rest</h2>
+      <div class="mt-11 overflow-x-auto border-2 border-forest">
+        <table class="w-full table-fixed border-collapse text-left">
+          <thead><tr class="font-display text-[15px] sm:text-[24px] font-black uppercase leading-tight">
+            <th class="w-[42%] bg-cream px-3 sm:px-6 py-4 text-ink lg:w-[520px]">What you get</th><th class="w-[26%] bg-forest px-3 sm:px-6 py-4 text-sun lg:w-[420px]">Paperbark Air</th><th class="bg-tan px-3 sm:px-6 py-4 text-muted">Typical installer</th>
+          </tr></thead>
+          <tbody>
+            {rows.map(([a, b]) => (
+              <tr class="border-t border-forest/15">
+                <td class="px-3 sm:px-6 py-[18px] text-[14px] sm:text-[17px] font-bold">{a}</td>
+                <td class="bg-mint px-3 sm:px-6 py-[18px] text-forest"><Icon name="check" size={22} /><span class="sr-only">Yes</span></td>
+                <td class="px-3 sm:px-6 py-[18px] text-[14px] sm:text-[17px] font-medium text-muted">{b ?? <span class="text-alert"><Icon name="x" size={22} /><span class="sr-only">No</span></span>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <!-- Reviews -->
+  <section class="bg-cream py-16 lg:py-24">
+    <div class="wrap">
+      <div class="flex flex-wrap items-end justify-between gap-5">
+        <div><p class="eyebrow text-forest-2">Reviews</p><h2 class="h2 mt-3">Northside locals, staying cool</h2></div>
+        <p class="bg-navy px-4 py-2.5 font-display text-[16px] font-extrabold uppercase text-sun">Sample reviews for demo purposes</p>
+      </div>
+      <div class="mt-11 grid gap-5 lg:grid-cols-3">
+        {reviews.map(([q, w, s]) => (
+          <figure class="flex flex-col border-2 border-forest/10 bg-white p-7">
+            <div class="flex gap-0.5 text-sun">{[1, 2, 3, 4, 5].map(() => <Icon name="star" size={22} />)}</div>
+            <blockquote class="mt-4 text-[18px] font-semibold leading-snug text-ink">{q}</blockquote>
+            <figcaption class="mt-auto flex items-end justify-between pt-5"><span><span class="block font-display text-[20px] font-black uppercase text-forest">{w}</span><span class="text-[13px] text-muted">{s}</span></span><Tag /></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+  <!-- Service area -->
+  <section class="bg-forest py-16 lg:py-24">
+    <div class="wrap grid gap-10 lg:grid-cols-[740px_1fr] lg:gap-[60px]">
+      <div>
+        <p class="eyebrow text-sun">Service area</p>
+        <h2 class="mt-4 text-[44px] sm:text-[64px] text-white">Local to Brisbane’s northside &amp; Moreton Bay</h2>
+        <p class="mt-6 text-[17px] sm:text-[19px] leading-relaxed text-mint-text">Based in Strathpine, so we’re rarely more than 30 minutes away. Not sure we cover you? Give us a call.</p>
+        <div class="mt-6"><Chips /></div>
+      </div>
+      <MapBox class="h-[360px] lg:h-[480px]" />
+    </div>
+  </section>
+  <!-- Quote -->
+  <section class="py-16 lg:py-24">
+    <div class="wrap grid gap-10 lg:grid-cols-[1fr_744px] lg:gap-14">
+      <div>
+        <p class="eyebrow text-forest-2">Free quote</p>
+        <h2 class="mt-4 text-[48px] sm:text-[68px] text-forest">Get a fixed quote in 48 hours</h2>
+        <p class="mt-6 text-[17px] sm:text-[19px] leading-relaxed text-muted">Tell us a bit about your home. A real person from our Strathpine team will get back to you.</p>
+        <div class="relative mt-7">
+          <Image src={img('pexels-32588555')} alt="Technician servicing an outdoor unit" widths={[520, 1040]} sizes="(min-width:1024px) 520px, 100vw" class="h-[300px] w-full object-cover sm:h-[360px]" />
+          <SampleTag />
+        </div>
+        <ul class="mt-6 space-y-2.5">
+          {['No-obligation, fixed written quote', 'Licensed and insured technicians', 'We never pass your details on'].map((t) => (
+            <li class="flex items-center gap-3 text-[16px] font-bold"><span class="grid size-[26px] place-items-center bg-sun text-navy"><Icon name="check" size={15} /></span>{t}</li>
+          ))}
+        </ul>
+      </div>
+      <QuoteForm />
+    </div>
+  </section>
+</Base>

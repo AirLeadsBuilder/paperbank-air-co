@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+import Icon from '../components/Icon.astro';
+import Logo from '../components/Logo.astro';
+import CTABand from '../components/CTABand.astro';
+interface Props { title: string; description: string; active: string; cta?: boolean }
+const { title, description, active, cta = true } = Astro.props;
+const nav = [['Home', '/'], ['Services', '/services'], ['About', '/about'], ['Gallery', '/gallery'], ['Contact', '/contact']];
+---
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#12372a" />
+</head>
+<body class="bg-white">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-50 focus:bg-sun focus:p-3">Skip to content</a>
+  <div id="ah-bar" class="bg-sun text-navy">
+    <div class="wrap flex min-h-[50px] items-center gap-3 py-2">
+      <Icon name="bolt" class="shrink-0" />
+      <p class="flex-1 font-display text-[17px] sm:text-[21px] uppercase leading-tight"><strong class="font-black">Unit stopped in a heatwave?</strong> <span class="font-semibold">Call 1300 000 000 and press 1 for after-hours breakdowns.</span></p>
+      <button type="button" aria-label="Dismiss" class="p-1" onclick="document.getElementById('ah-bar').remove()"><Icon name="x" /></button>
+    </div>
+  </div>
+  <div class="hidden bg-cream md:block">
+    <div class="wrap flex h-[87px] items-center justify-between">
+      <nav class="flex gap-7 font-display text-[17px] font-bold uppercase tracking-wider text-forest" aria-label="Utility">
+        <a href="/services" class="hover:underline">Offers</a><a href="/services" class="hover:underline">Finance</a><a href="/services#faq" class="hover:underline">Warranty</a><a href="/about" class="hover:underline">Blog</a>
+      </nav>
+      <div class="flex items-center gap-7">
+        <div class="text-right">
+          <a href="tel:1300000000" class="block font-display text-[38px] font-black leading-none text-navy">1300 000 000</a>
+          <p class="text-[13px] font-medium text-muted">We're not happy until you're happy.</p>
+        </div>
+        <a href="/contact#quote" class="btn btn-sun !min-h-[43px] !px-5 !text-[17px]">Get a Free Quote</a>
+      </div>
+    </div>
+  </div>
+  <header class="sticky top-0 z-40 bg-forest">
+    <div class="wrap flex h-[72px] md:h-[82px] items-center justify-between">
+      <Logo />
+      <nav class="hidden lg:flex gap-10" aria-label="Main">
+        {nav.map(([l, h]) => (
+          <a href={h} class={`relative pb-1 font-display text-[22px] font-extrabold uppercase tracking-wide ${active === l ? 'text-sun' : 'text-white hover:text-sun'}`} aria-current={active === l ? 'page' : undefined}>
+            {l}{active === l && <span class="absolute bottom-[-6px] left-0 h-[3px] w-10 bg-sun" />}
+          </a>
+        ))}
+      </nav>
+      <div class="flex items-center gap-2 lg:hidden">
+        <a href="tel:1300000000" class="grid size-11 place-items-center bg-sun text-navy" aria-label="Call 1300 000 000"><Icon name="phone" /></a>
+        <button id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" class="grid size-11 place-items-center border-2 border-white/40 text-white" aria-label="Menu"><Icon name="menu" /></button>
+      </div>
+    </div>
+    <nav id="mobile-nav" class="hidden border-t border-white/15 bg-forest lg:hidden" aria-label="Mobile">
+      <div class="wrap flex flex-col py-3">
+        {nav.map(([l, h]) => <a href={h} class={`border-b border-white/10 py-3 font-display text-[24px] font-extrabold uppercase ${active === l ? 'text-sun' : 'text-white'}`}>{l}</a>)}
+        <a href="/contact#quote" class="btn btn-sun mt-4">Get a Free Quote</a>
+      </div>
+    </nav>
+  </header>
+  <main id="main"><slot /></main>
+  {cta && <CTABand />}
+  <footer class="bg-navy text-white">
+    <div class="wrap pt-[72px] pb-0">
+      <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-[380px_1fr_1fr_1fr] lg:gap-14">
+        <div>
+          <Logo />
+          <p class="mt-5 max-w-[380px] text-[15px] leading-relaxed text-slate">Split system installs, replacements, servicing and repairs for Brisbane's northside and Moreton Bay.</p>
+          <ul class="mt-5 space-y-1 text-[13px] text-slate-2"><li>QBCC Licence No. 0000000 [sample]</li><li>ARC Licence AU00000 [sample]</li><li>ABN 00 000 000 000 [placeholder]</li></ul>
+        </div>
+        <div><h3 class="text-[20px] text-sun">Pages</h3><ul class="mt-3 space-y-2 text-[15px]">{nav.map(([l, h]) => <li><a href={h} class="hover:text-sun">{l}</a></li>)}</ul></div>
+        <div><h3 class="text-[20px] text-sun">Contact</h3><ul class="mt-3 space-y-2 text-[15px]"><li>Strathpine QLD 4500</li><li><a href="tel:1300000000" class="hover:text-sun">1300 000 000</a></li><li><a href="mailto:hello@paperbarkair.example" class="hover:text-sun">hello@paperbarkair.example</a></li></ul></div>
+        <div><h3 class="text-[20px] text-sun">Hours</h3><ul class="mt-3 space-y-2 text-[15px]"><li>Mon–Fri&nbsp; 7am – 5pm</li><li>Sat&nbsp; 8am – 12pm</li><li>After-hours breakdowns: press 1</li></ul></div>
+      </div>
+      <div class="mt-12 flex flex-col-reverse gap-4 pb-7 md:flex-row md:items-center md:justify-between">
+        <p class="text-[13px] text-slate-2">© 2026 Paperbark Air Co. &nbsp; · &nbsp; <a href="#" class="hover:text-white">Privacy</a> &nbsp;|&nbsp; <a href="#" class="hover:text-white">Terms</a></p>
+        <p class="bg-sun px-3.5 py-2 font-display text-[15px] md:text-[16px] font-extrabold uppercase text-navy">Demo site by AirLeads Builder. This business is fictional.</p>
+      </div>
+      <div class="h-px bg-white/15"></div>
+      <div class="h-7"></div>
+    </div>
+  </footer>
+  <script>
+    const b = document.getElementById('menu-btn'), m = document.getElementById('mobile-nav');
+    b?.addEventListener('click', () => { const o = m!.classList.toggle('hidden') === false; b.setAttribute('aria-expanded', String(o)); });
+  </script>
+</body>
+</html>

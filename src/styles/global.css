@@ -1,0 +1,55 @@
+@import "tailwindcss";
+@import "@fontsource/archivo/latin-400.css";
+@import "@fontsource/archivo/latin-500.css";
+@import "@fontsource/archivo/latin-600.css";
+@import "@fontsource/archivo/latin-700.css";
+@import "@fontsource/barlow-condensed/latin-600.css";
+@import "@fontsource/barlow-condensed/latin-700.css";
+@import "@fontsource/barlow-condensed/latin-800.css";
+@import "@fontsource/barlow-condensed/latin-900.css";
+
+@theme {
+  --color-forest: #12372a;
+  --color-forest-2: #1f5a43;
+  --color-navy: #1b2a4a;
+  --color-sun: #f7c531;
+  --color-sun-dark: #e0ae14;
+  --color-cream: #f4ecd8;
+  --color-tan: #eadfc4;
+  --color-ink: #101814;
+  --color-muted: #4f5b55;
+  --color-mint: #dce8df;
+  --color-mint-text: #d5e3d9;
+  --color-slate: #b8c4da;
+  --color-slate-2: #8896b0;
+  --color-alert: #e4572e;
+  --color-ph: #8a938e;
+  --font-display: "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body);
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); color: var(--color-ink); -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; line-height: .98; }
+}
+
+@layer components {
+  .wrap { width: 100%; max-width: 1440px; margin-inline: auto; padding-inline: 20px; }
+  @media (min-width: 768px) { .wrap { padding-inline: 40px; } }
+  @media (min-width: 1280px) { .wrap { padding-inline: 60px; } }
+  .eyebrow { font-family: var(--font-display); font-weight: 800; font-size: 18px; letter-spacing: .14em; text-transform: uppercase; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 61px; padding: 0 32px; font-family: var(--font-display); font-weight: 800; font-size: 22px; text-transform: uppercase; letter-spacing: .02em; border: 2px solid transparent; transition: transform .15s, filter .15s; }
+  .btn:hover { filter: brightness(1.06); transform: translateY(-1px); }
+  .btn-sun { background: var(--color-sun); color: var(--color-navy); }
+  .btn-navy { background: var(--color-navy); color: #fff; }
+  .btn-forest { background: var(--color-forest); color: #fff; }
+  .btn-ghost-light { border-color: #fff; color: #fff; }
+  .btn-ghost-navy { border-color: var(--color-navy); color: var(--color-navy); }
+  .h2 { font-size: clamp(40px, 6vw, 72px); color: var(--color-forest); }
+  .field-label { display:block; font-family: var(--font-display); font-weight: 800; font-size: 15px; letter-spacing: .06em; text-transform: uppercase; color: var(--color-forest); margin-bottom: 6px; }
+  .field { width: 100%; height: 49px; background: #fff; border: 1.5px solid #c9c0a8; padding: 0 16px; font-size: 15px; color: var(--color-ink); }
+  .field::placeholder { color: var(--color-ph); }
+  .field:focus { outline: 2px solid var(--color-sun); outline-offset: 0; border-color: var(--color-forest); }
+}
